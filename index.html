@@ -13,20 +13,39 @@
   <body>
     
       <div class="jumbotron-fluid"
-      style="background-image: linear-gradient(to right, pink, blanchedalmond); opacity: 70%;">
+      style="background-image: linear-gradient(to right, pink, blanchedalmond); opacity: 70%;"> 
       <div class="container" id="nav">
         <h1 class="display-4">Weather Dashboard</h1>
-
-      <div class="container" id="main">
-          <div class="row mb-2">
-              <div class="col-sm12 col-md-3 col-xl-3"></div>
-
-
-          </div>
-
-
-
       </div>
+      </div>
+
+        <div class="container" id=" main">
+          <div class="row mb-2">
+              <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                  <div class="input-group mb-3" style="width: 100%;">
+                      <input id="search-input" type="city" name="city" class="form-control"
+                          placeholder="Please enter a city" aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                          <button id="searchBtn" class="btn btn-light"
+                              style="background-color: pink; color: floralwhite;" type="button">Search</button>
+                      </div>
+                  </div>
+                  <ul id="city-list" class="list-group list-group-flush">
+                  </ul>
+              </div>
+
+              
+
+
+     
+
+
+
+
+          
+
+
+      
 
   </body>
 </html>

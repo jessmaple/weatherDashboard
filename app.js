@@ -93,6 +93,65 @@ function lookUpWeather() {
     temp = Math.round(temp);
     ptemp.append("temperature:", temp);
     $("#dashboard").append(ptemp);
+
+    var humid = data.main.humidity;
+    var phumid = $("<p>");
+    phumid.append("humidity:", humid);
+    $("#dashboard").append(phumid);
+
+    var wind = data.wind.speed;
+    var pwind = $("<p>");
+    pwind.append("Wind Speed:", wind);
+    $("#dashboard").append(pwind);
+
+    $.ajax({
+      url: `http://api.openweathermap.org/data/2.5/uvi?appid=70abe480196682c4e522136544b6489c&lat=${data.coord.lat}&lon=${data.coord.lon}`,
+      method: "GET"
+    }).then(function(data) {
+      console.log(data);
+      var uv = data.value;
+      var puv = $("<p>");
+      puv.append("UV Index:", uv);
+      $("#dashboard").append(puv);
+
+      $.ajax({
+        url: `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=70abe480196682c4e522136544b6489c`,
+        method: "GET"
+      }).then(function(data) {
+        console.log(data);
+        console.log(data.list[0].dt_txt);
+        var row = $("<div class= 'row'>");
+
+        for (let index = 0; index < data.list.length; index++) {
+          if (data.list[index].dt_txt.indexOf("00:00:00") > -1) {
+            //         <div class="card">
+            //   <div class="card-body">
+            //     <h5 class="card-title">Special title treatment</h5>
+            //     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            //   </div>
+            // </div>
+
+            var col = $("<div class = 'col-sm-2'>");
+            var card = $("<div class ='card'>");
+            var cardBody = $("<div class = 'card-body'>");
+            var title = $("<h5 class = 'card-title'>");
+            title.append("5-Day Forcast:");
+            var cardText = $("<p class = 'card-text'>");
+            cardText.append(
+              moment(data.list[index].dt, "X").format("MM/DD/YYYY")
+            );
+            card.append(cardBody, title, cardText);
+
+            col.append(card);
+            row.append(col);
+
+            $("#fiveDay").append(row);
+
+            console.log(row);
+          }
+        }
+      });
+    });
   });
 }
 

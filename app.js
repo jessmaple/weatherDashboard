@@ -5,7 +5,8 @@ var cityArray = [];
 // On click - Action for the button to be created, Allows user to add a list of cities in local storage
 $("#search-button").on("click", function() {
   // Look up weather from open weather API
-  lookUpWeather();
+  var city = $("#search").val();
+  lookUpWeather(city);
 
   // List of cities searched
   loadCity();
@@ -50,18 +51,24 @@ function loadCity() {
       // Li tag appends to ul tag
       ul.append(li);
     }
+
     // ul appends to city div
     $("#city").append(ul);
+
+    $(".list-group-item").on("click", function() {
+      var city = $(this).text();
+      lookUpWeather(city);
+    });
   }
 }
 
 // GET requests retrieve data, Post requests inserts date, Delete requests delete data, Put requests update data
 // client initiates requests, server recives requests, Ajax is a client, Jquery is all client requests
 // api call -
-function lookUpWeather() {
+function lookUpWeather(city) {
   var queryurl =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
-    $("#search").val() +
+    city +
     "&appid=70abe480196682c4e522136544b6489c";
   console.log(queryurl);
   $.ajax({
@@ -70,6 +77,8 @@ function lookUpWeather() {
     //    Static tags are tags in the HTML file, Dynamic tags are tags created from JS or Jquery
   }).then(function(data) {
     console.log(data);
+
+    $("#dashboard").empty();
 
     var pcity = $("<p>");
     var city = data.name;
@@ -131,6 +140,7 @@ function lookUpWeather() {
             //   </div>
             // </div>
 
+            $("#fiveDay").empty();
             var col = $("<div class = 'col-sm-2'>");
             var card = $("<div class ='card'>");
             var cardBody = $("<div class = 'card-body'>");
@@ -140,14 +150,34 @@ function lookUpWeather() {
             cardText.append(
               moment(data.list[index].dt, "X").format("MM/DD/YYYY")
             );
+            var source =
+              "http://openweathermap.org/img/w/" +
+              data.list[index].weather[0].icon +
+              ".png";
+
+            var image = $("<img>");
+            image.attr("src", source);
+
+            var wea = data.list[index].main.temp;
+            var temp2 = (wea - 273.15) * 1.8 + 32;
+            temp2 = Math.round(temp2);
+
+            var ptemp2 = $("<p>");
+
+            var hum = data.list[index].main.humidity;
+            phum = $("<p>");
+
+            cardText.append(image);
+            ptemp2.append("Temp: ", temp2, "°F");
+            cardText.append(ptemp2);
+            phum.append("Humidity: ", hum, "%");
+            cardText.append(phum);
             card.append(cardBody, title, cardText);
 
             col.append(card);
             row.append(col);
 
             $("#fiveDay").append(row);
-
-            console.log(row);
           }
         }
       });

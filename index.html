@@ -3,135 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
     <link
       rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" type="text/css" href="assets/weather.css" />
-
-    <title>Weather Dashboard</title>
   </head>
   <body>
-    <div
-      class="jumbotron-fluid"
-      style="background-image: linear-gradient(to right, pink, blanchedalmond); opacity: 70%;"
-    >
-      <div class="container" id="nav">
-        <h1 class="display-4">Weather Dashboard</h1>
-      </div>
-    </div>
-
-    <div class="container" id=" main">
-      <div class="row mb-2">
-        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
-          <div class="input-group mb-3" style="width: 100%;">
-            <input
-              id="search-input"
-              type="city"
-              name="city"
-              class="form-control"
-              placeholder="Please enter a city"
-              aria-describedby="basic-addon2"
-            />
-            <div class="input-group-append">
-              <button
-                id="searchBtn"
-                class="btn btn-light"
-                style="background-color: pink; color: floralwhite;"
-                type="button"
-              >
-                Search
-              </button>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="row">
+            <div class="col-sm-8">
+              <input id="search" class="form-control" type="text" />
+            </div>
+            <div class="col-sm-2">
+              <button id="search-button">search</button>
             </div>
           </div>
-          <ul id="city-list" class="list-group list-group-flush"></ul>
-        </div>
-
-        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">
-                <span id="cityName"></span> - <span class="date"></span
-                ><span id="icon"></span>
-              </h5>
+          <div class="row">
+            <div class="col-sm-8">
+              <div id="city"></div>
             </div>
-            <ul class="list-group list-group-flush mb-2">
-              <li class="list-group-item">
-                Temperature: <span id="temp"></span> °F
-              </li>
-              <li class="list-group-item">
-                Humidity:<span id="humid"></span> %
-              </li>
-              <li class="list-group-item">
-                Wind Speed:<span id="wind"></span> mph
-              </li>
-              <li class="list-group-item">
-                UV Index:<span
-                  id="uv"
-                  class="rounded border border-danger bg-danger text-white"
-                ></span>
-              </li>
-            </ul>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="jumbotron" id="dashboard"></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div id="fiveDay"></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="container" id=" main">
-        <div class="row mb-1">
-          <div class="col-3">
-         </div>
-
-         <div class="card">
-          <div class="card-body">
-              <h5 id="date2"></h5>
-              <li id="icon2" class="list-group-item"></li>
-              <li class="list-group-item">Temperature: <br><span id="temp2"></span> °F</li>
-              <li class="list-group-item">Humidity: <br><span id="humid2"></span> %</li>
-          </div>
-      </div>
-
-      <div class="card">
-          <div class="card-body">
-              <h5 id="date3"></h5>
-              <li id="icon3" class="list-group-item"></li>
-              <li class="list-group-item">Temperature: <br><span id="temp3"></span> °F</li>
-              <li class="list-group-item">Humidity: <br><span id="humid3"></span> %</li>
-          </div>
-      </div>
-
-      <div class="card">
-          <div class="card-body">
-              <h5 id="date4"></h5>
-              <li id="icon4" class="list-group-item"></li>
-              <li class="list-group-item">Temperature: <br><span id="temp4"></span> °F</li>
-              <li class="list-group-item">Humidity: <br><span id="humid4"></span> %</li>
-          </div>
-      </div>
-
-      <div class="card">
-          <div class="card-body">
-              <h5 id="date5"></h5>
-              <li id="icon5" class="list-group-item"></li>
-              <li class="list-group-item">Temperature: <br><span id="temp5"></span> °F</li>
-              <li class="list-group-item">Humidity: <br><span id="humid5"></span> %</li>
-          </div>
-      </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.4.1.js"
-integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<!-- <script defer src="weather.js"></script> -->
-<script src="app.js"></script>
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>

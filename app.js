@@ -3,7 +3,7 @@ var cityArray = [];
 
 // search button
 // On click - Action for the button to be created, Allows user to add a list of cities in local storage
-$("#search-button").on("click", function() {
+$("#search-button").on("click", function () {
   // Look up weather from open weather API
   var city = $("#search").val();
   lookUpWeather(city);
@@ -16,9 +16,7 @@ function loadCity() {
   //ul = Created a dynamic unordered list using JQuery
   var ul = $("<ul class='list-group'>");
   //   gives city value from text box
-  var search = $("#search")
-    .val()
-    .trim();
+  var search = $("#search").val().trim();
 
   // .empty is to clear the div and avoid duplicates
   $("#city").empty();
@@ -55,7 +53,7 @@ function loadCity() {
     // ul appends to city div
     $("#city").append(ul);
 
-    $(".list-group-item").on("click", function() {
+    $(".list-group-item").on("click", function () {
       var city = $(this).text();
       lookUpWeather(city);
     });
@@ -73,9 +71,9 @@ function lookUpWeather(city) {
   console.log(queryurl);
   $.ajax({
     url: queryurl,
-    method: "GET"
+    method: "GET",
     //    Static tags are tags in the HTML file, Dynamic tags are tags created from JS or Jquery
-  }).then(function(data) {
+  }).then(function (data) {
     console.log(data);
 
     $("#dashboard").empty();
@@ -90,7 +88,7 @@ function lookUpWeather(city) {
     $("#dashboard").append(pcity);
 
     var icon =
-      "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+      "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
     var img = $("<img>");
     img.attr("src", icon);
     pcity.append(img);
@@ -114,9 +112,9 @@ function lookUpWeather(city) {
     $("#dashboard").append(pwind);
 
     $.ajax({
-      url: `http://api.openweathermap.org/data/2.5/uvi?appid=70abe480196682c4e522136544b6489c&lat=${data.coord.lat}&lon=${data.coord.lon}`,
-      method: "GET"
-    }).then(function(data) {
+      url: `https://api.openweathermap.org/data/2.5/uvi?appid=70abe480196682c4e522136544b6489c&lat=${data.coord.lat}&lon=${data.coord.lon}`,
+      method: "GET",
+    }).then(function (data) {
       console.log(data);
       var uv = data.value;
       var puv = $("<p>");
@@ -124,9 +122,9 @@ function lookUpWeather(city) {
       $("#dashboard").append(puv);
 
       $.ajax({
-        url: `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=70abe480196682c4e522136544b6489c`,
-        method: "GET"
-      }).then(function(data) {
+        url: `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=70abe480196682c4e522136544b6489c`,
+        method: "GET",
+      }).then(function (data) {
         console.log(data);
         console.log(data.list[0].dt_txt);
         var row = $("<div class= 'row'>");
@@ -151,7 +149,7 @@ function lookUpWeather(city) {
               moment(data.list[index].dt, "X").format("MM/DD/YYYY")
             );
             var source =
-              "http://openweathermap.org/img/w/" +
+              "https://openweathermap.org/img/w/" +
               data.list[index].weather[0].icon +
               ".png";
 
